@@ -87,8 +87,7 @@ void print_nibbles() {
     }
 }
 
-uint64_t nibbles_to_uint64_t()
-{
+uint64_t nibbles_to_uint64_t() {
     uint64_t u = 0;
     for (size_t i = nibbles.len; i > 0; i--)
     {
@@ -98,13 +97,11 @@ uint64_t nibbles_to_uint64_t()
     return u;
 }
 
-void print_unsigned()
-{
+void print_unsigned() {
     printf("%llu", nibbles_to_uint64_t());
 }
 
-void print_signed()
-{
+void print_signed() {
     uint64_t u = nibbles_to_uint64_t();
     if (nibbles.nibble[nibbles.len - 1] & 0b1000)
     {
