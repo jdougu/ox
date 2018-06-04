@@ -6,7 +6,7 @@
 
 static struct {
     size_t len;
-    uint8_t nibble[MAX_INPUT / 2];
+    u_int8_t nibble[MAX_INPUT / 2];
 } nibbles;
 
 void usage();
@@ -73,7 +73,7 @@ void interactive_loop() {
     }
 }
 
-void print_nibble(uint8_t byte) {
+void print_nibble(u_int8_t byte) {
     if (byte & 0b1000) putchar('1'); else putchar('0');
     if (byte & 0b0100) putchar('1'); else putchar('0');
     if (byte & 0b0010) putchar('1'); else putchar('0');
@@ -87,25 +87,25 @@ void print_nibbles() {
     }
 }
 
-uint64_t nibbles_to_uint64_t() {
-    uint64_t u = 0;
+u_int64_t nibbles_to_u_int64_t() {
+    u_int64_t u = 0;
     for (size_t i = nibbles.len; i > 0; i--)
     {
         u <<= 4;
-        u |= (uint64_t)nibbles.nibble[i - 1];
+        u |= (u_int64_t)nibbles.nibble[i - 1];
     }
     return u;
 }
 
 void print_unsigned() {
-    printf("%llu", nibbles_to_uint64_t());
+    printf("%llu", nibbles_to_u_int64_t());
 }
 
 void print_signed() {
-    uint64_t u = nibbles_to_uint64_t();
+    u_int64_t u = nibbles_to_u_int64_t();
     if (nibbles.nibble[nibbles.len - 1] & 0b1000)
     {
-        uint64_t m = 0xFFFFFFFFFFFFFFF0;
+        u_int64_t m = 0xFFFFFFFFFFFFFFF0;
         m <<= (nibbles.len - 1) * 4;
         u = m | u;
     }
